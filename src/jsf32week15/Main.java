@@ -553,7 +553,7 @@ public class Main extends Application {
 
     public String testConnection(int x)
     {
-        String returnstring = "Success!";
+        String returnstring = "Nothing happened!";
         try {
             Socket socket = new Socket("localhost", 8189);
             try {

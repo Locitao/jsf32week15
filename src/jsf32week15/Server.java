@@ -36,6 +36,15 @@ public class Server {
                 while (!finished)
                 {
                     try {
+                        if (client.isClosed())
+                        {
+                            client = socket.accept();
+                            out = client.getOutputStream();
+                            in = client.getInputStream();
+
+                            outObject = new ObjectOutputStream(out);
+                            inObject = new ObjectInputStream(in);
+                        }
                         incomingObject = inObject.readObject();
                         if (incomingObject instanceof Integer)
                         {
@@ -56,6 +65,9 @@ public class Server {
                         }
                     }
                     catch (Exception ex) {}
+                    finally {
+                        client.close();
+                    }
                 }
 
             }
